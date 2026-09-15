@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioIA - Assistente Virtual</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f4f8; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        
+        .chat-container {
+            width: 100%;
+            max-width: 400px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #1a56db;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background-color: #f9fafb;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .message.bot {
+            background-color: #e5e7eb;
+            color: #1f2937;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .message.user {
+            background-color: #1a56db;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        #user-input:focus { border-color: #1a56db; }
+
+        #send-btn {
+            background-color: #1a56db;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            margin-left: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        #send-btn:hover { background-color: #1e40af; }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            💙 CardioIA Assistant
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+            <!-- A primeira mensagem do bot já vem por padrão -->
+            <div class="message bot">
+                Olá! Sou o assistente virtual CardioIA. Como posso ajudar com a sua saúde cardiológica hoje?
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="user-input" placeholder="Digite sua dúvida ou sintoma..." onkeypress="handleKeyPress(event)">
+            <button id="send-btn" onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para adicionar a mensagem na tela
+        function addMessageToUI(text, sender) {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            messageDiv.innerText = text;
+            chatMessages.appendChild(messageDiv);
+            
+            // Rolar a tela para a última mensagem
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Função que envia a mensagem para o Flask
+        async function sendMessage() {
+            const inputField = document.getElementById('user-input');
+            const messageText = inputField.value.trim();
+
+            if (messageText === "") return; // Não envia mensagem vazia
+
+            // 1. Mostra a mensagem do usuário na tela
+            addMessageToUI(messageText, 'user');
+            inputField.value = ''; // Limpa o campo de texto
+
+            // 2. Chama a API do Backend (Flask)
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: messageText })
+                });
+
+                const data = await response.json();
+                
+                // 3. Mostra a resposta do bot na tela
+                addMessageToUI(data.response, 'bot');
+
+            } catch (error) {
+                console.error("Erro na comunicação com o servidor:", error);
+                addMessageToUI("⚠️ Desculpe, não consegui me conectar ao servidor. Verifique se o backend está rodando.", 'bot');
+            }
+        }
+
+        // Permite enviar apertando a tecla Enter
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>
