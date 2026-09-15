@@ -7,7 +7,7 @@ O **CardioIA** é um projeto acadêmico inovador focado na convergência entre t
 Nesta **Fase 5 – Suporte Digital ao Paciente (Assistente Cardiológico Virtual)**, o projeto avança para a comunicação inteligente utilizando Processamento de Linguagem Natural (NLP). Assumimos o desafio de construir um chatbot conversacional simpático e eficiente, capaz de interagir com o usuário, interpretar sintomas relatados em linguagem natural e apresentar respostas contextualizadas, servindo como uma triagem primária e plataforma de orientação em saúde.
 
 ## 👨‍⚕️ Integrantes da Equipe
-- <a href="https://www.linkedin.com/in/nicolas--araujo/">Nicolas Antonio Silva Araujo</a> (RM: XXXXXX)
+- <a href="https://www.linkedin.com/in/nicolas--araujo/">Nicolas Antonio Silva Araujo</a> (RM: 566307)
 - <a href="https://www.linkedin.com/in/vitoria-bagatin-31ba88266/">Vitória Pereira Bagatin</a> (RM: 566519)
 
 *(Nota: Preencha seu RM no espaço com X)*
