@@ -11,7 +11,7 @@ CORS(app)
 # ==========================================
 API_KEY = '4Ddotl8YoCIlrRUIFAYKltroXEURynJ-_9uQ14BeCiGC'
 URL = 'https://api.au-syd.assistant.watson.cloud.ibm.com/instances/5b1c046e-d37b-4618-a1d6-622eaff73dc6'
-WORKSPACE_ID = 'aaaaa'
+WORKSPACE_ID = '95bb681d-8c58-4dde-af35-8a66bdd857d8'
 
 # ==========================================
 # 2. AUTENTICAÇÃO
