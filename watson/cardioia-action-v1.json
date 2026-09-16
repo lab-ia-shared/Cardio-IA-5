@@ -1,0 +1,1865 @@
+{
+  "name": "CardioIA-action",
+  "type": "action",
+  "counts": {
+    "actions": 11,
+    "intents": 8,
+    "entities": 4,
+    "data_types": 0,
+    "collections": 0,
+    "global_variables": 0
+  },
+  "status": "Available",
+  "language": "pt-br",
+  "skill_id": "f4f17548-5ac3-44ed-991a-4296c49d426a",
+  "workspace": {
+    "actions": [
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_001",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Acho que não entendi. Reformule sua pergunta."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_001",
+            "condition": {
+              "lte": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            },
+            "next_step": "step_002"
+          },
+          {
+            "step": "step_002",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": ""
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "invoke_another_action_and_end",
+              "invoke_action": {
+                "action": "fallback",
+                "policy": "default",
+                "parameters": null,
+                "result_variable": "step_002_result_1",
+                "ignore_end_action_steps": false
+              }
+            },
+            "variable": "step_002",
+            "condition": {
+              "gt": [
+                {
+                  "system_variable": "no_action_matches_count"
+                },
+                {
+                  "scalar": 3
+                }
+              ]
+            }
+          }
+        ],
+        "title": "No matches",
+        "action": "anything_else",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "anything_else"
+        },
+        "variables": [
+          {
+            "title": "Receio não entender o que você está perguntando, por favor, refo",
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002",
+            "data_type": "any"
+          },
+          {
+            "variable": "step_002_result_1",
+            "data_type": "any"
+          }
+        ],
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_367",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Não consegui entender completamente o que você precisa. Posso ajudar com informações sobre cardiomegalia, pressão arterial, frequência cardíaca, sintomas e resultados de exames. Tente reformular sua pergunta ou me diga o que você gostaria de sabe"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_367",
+            "next_step": "digression_failure"
+          },
+          {
+            "step": "digression_failure",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Desculpe, não pude confirmar se você queria retornar ao tópico anterior, deixe-me conectar a um agente."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Vamos mandá-lo para um agente disponível."
+                },
+                "agent_unavailable": {
+                  "message": "Não há agentes disponíveis neste momento. Quando houver um disponível, conectaremos você."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "digression_failure",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Failed to confirm topic return"
+                }
+              ]
+            },
+            "next_step": "step_001"
+          },
+          {
+            "step": "step_001",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Acho que não entendi. Eu posso conectar você a um agente."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Vamos mandá-lo para um agente disponível."
+                },
+                "agent_unavailable": {
+                  "message": "Não há agentes disponíveis neste momento. Quando houver um disponível, conectaremos você."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_001",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Step validation failed"
+                }
+              ]
+            },
+            "next_step": "step_002"
+          },
+          {
+            "step": "step_002",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Desculpe não poder ajudá-lo. Vou conectá-lo a um agente imediatamente."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Vamos mandá-lo para um agente disponível."
+                },
+                "agent_unavailable": {
+                  "message": "Não há agentes disponíveis neste momento. Quando houver um disponível, conectaremos você."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_002",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Agent requested"
+                }
+              ]
+            },
+            "next_step": "step_003"
+          },
+          {
+            "step": "step_003",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Acho que não entendi o que você está pedindo; vou conectá-lo a um agente."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Vamos mandá-lo para um agente disponível."
+                },
+                "agent_unavailable": {
+                  "message": "Não há agentes disponíveis neste momento. Quando houver um disponível, conectaremos você."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_003",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "No action matches"
+                }
+              ]
+            },
+            "next_step": "step_004"
+          },
+          {
+            "step": "step_004",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Parece que esta conversa seria melhor gerenciada por um agente humano. Deixe-me conectá-lo a um de nossos agentes."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Vamos mandá-lo para um agente disponível."
+                },
+                "agent_unavailable": {
+                  "message": "Não há agentes disponíveis neste momento. Quando houver um disponível, conectaremos você."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_004",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Danger word detected"
+                }
+              ]
+            },
+            "next_step": "step_005"
+          },
+          {
+            "step": "step_005",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Parece que esta conversa seria melhor gerenciada por um agente humano. Deixe-me conectá-lo a um de nossos agentes."
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "connect_to_agent",
+              "response": {
+                "transfer_info": {
+                  "target": {}
+                },
+                "agent_available": {
+                  "message": "Vamos mandá-lo para um agente disponível."
+                },
+                "agent_unavailable": {
+                  "message": "Não há agentes disponíveis neste momento. Quando houver um disponível, conectaremos você."
+                },
+                "message_to_human_agent": ""
+              }
+            },
+            "variable": "step_005",
+            "condition": {
+              "eq": [
+                {
+                  "system_variable": "fallback_reason"
+                },
+                {
+                  "scalar": "Profanity detected"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Fallback",
+        "action": "fallback",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "fallback_connect_to_agent"
+        },
+        "variables": [
+          {
+            "title": "Falha ao retornar para o tópico",
+            "variable": "digression_failure",
+            "data_type": "any"
+          },
+          {
+            "title": "Acho que não entendi. Eu posso conectar você a um agente.",
+            "variable": "step_001",
+            "data_type": "any"
+          },
+          {
+            "title": "Desculpe não poder ajudá-lo. Vou conectá-lo a um agente imediata",
+            "variable": "step_002",
+            "data_type": "any"
+          },
+          {
+            "title": "Acho que não entendi o que você está pedindo; vou conectá-lo a u",
+            "variable": "step_003",
+            "data_type": "any"
+          },
+          {
+            "title": "Parece que esta conversa seria melhor gerenciada",
+            "variable": "step_004",
+            "data_type": "any"
+          },
+          {
+            "title": "Profanidade - Parece que esta conversa",
+            "variable": "step_005",
+            "data_type": "any"
+          },
+          {
+            "title": "Não consegui entender completamente o que você precisa. Posso aj",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_367",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "run_always",
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "danger_word_detected",
+            "type": "standard",
+            "title": "Connect to agent",
+            "handlers": [],
+            "resolver": {
+              "type": "fallback"
+            },
+            "variable": "danger_word_detected_variable",
+            "condition": {
+              "entity": "danger_words"
+            },
+            "next_step": "profanity_detected"
+          },
+          {
+            "step": "profanity_detected",
+            "type": "standard",
+            "title": "Show warning",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Use o idioma apropriado ao interagir com o assistente."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "max_hits",
+                "handler": "max_hits_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "max_hits": 2,
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "profanity_detected_variable",
+            "condition": {
+              "entity": "profane_words"
+            }
+          }
+        ],
+        "title": "Trigger word detected",
+        "action": "run_always",
+        "boosts": [],
+        "handlers": [],
+        "variables": [
+          {
+            "title": "Profanity detected",
+            "variable": "danger_word_detected_variable",
+            "data_type": "any"
+          },
+          {
+            "title": "Profane word detected",
+            "variable": "profanity_detected_variable",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "anything_else"
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_187",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Olá! Eu sou o CardioIA, seu assistente cardiológico virtual. Posso ajudar com informações sobre saúde cardiovascular, sintomas, resultados de exames e cuidados com a saúde do coração. Como posso ajudar?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_187"
+          }
+        ],
+        "title": "Olá",
+        "action": "action_43613",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_43613_intent_29154"
+        },
+        "variables": [
+          {
+            "title": "Olá! Eu sou o CardioIA, seu assistente cardiológico virtual. Pos",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_187",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "fallback",
+        "display_name": "saudação",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_982",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Cardiomegalia é o aumento do tamanho do coração. Esse aumento pode estar relacionado a diferentes condições de saúde e precisa ser avaliado por um profissional. No caso de uma radiografia analisada pelo CardioIA, o resultado da Inteligência Artificial serve como apoio e não substitui a avaliação médica."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_982"
+          }
+        ],
+        "title": "informações sobre cardiomegalia",
+        "action": "action_25363",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_25363_intent_46438"
+        },
+        "variables": [
+          {
+            "title": "Cardiomegalia é o aumento do tamanho do coração. Esse aumento po",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_982",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_43613",
+        "display_name": "informações sobre cardiomegalia",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_001",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text": "Bem-vindo, como posso ajudá-lo?"
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_001"
+          }
+        ],
+        "title": "Greet customer",
+        "action": "welcome",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "expression": "welcome"
+        },
+        "variables": [
+          {
+            "variable": "step_001",
+            "data_type": "any"
+          }
+        ],
+        "next_action": "action_3911",
+        "disambiguation_opt_out": true
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_315",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "A pressão arterial é a força que o sangue exerce contra as paredes dos vasos sanguíneos enquanto o coração bombeia o sangue pelo corpo. Ela é normalmente representada por dois valores: a pressão sistólica, que corresponde à pressão durante a contração do coração, e a pressão diastólica, que corresponde à pressão durante o relaxamento.\n\nQuando a pressão permanece elevada por períodos prolongados,"
+                          },
+                          {
+                            "scalar": " pode aumentar o risco de problemas cardiovasculares, como doenças do coração e dos vasos sanguíneos. Já uma pressão muito baixa também pode causar sintomas em algumas pessoas, como tontura e fraqueza.\n\nO CardioIA pode fornecer informações sobre pressão arterial, mas não realiza diagnóstico. Para interpretar corretamente uma medida de pressão,"
+                          },
+                          {
+                            "scalar": " é importante considerar o histórico e as condições de saúde da pessoa junto a um profissional de saúde."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_315"
+          }
+        ],
+        "title": "informações sobre pressão arterial",
+        "action": "action_10291",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_10291_intent_3945"
+        },
+        "variables": [
+          {
+            "title": "A pressão arterial é a força que o sangue exerce contra as pared",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_315",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_25363",
+        "display_name": "informações sobre pressão arterial",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_339",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Entendi. Para entender melhor o que você está sentindo, há quanto tempo esses sintomas começaram?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_339",
+            "next_step": "step_340"
+          },
+          {
+            "step": "step_340",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Além disso, você está sentindo dor ou pressão no peito, falta de ar, palpitações, tontura ou algum outro sintoma?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "question": {
+              "free_text": true
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_340",
+            "next_step": "step_165"
+          },
+          {
+            "step": "step_165",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Obrigado por me informar. Para avaliar melhor a situação, esses sintomas estão acontecendo neste momento?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Sim",
+                      "value": {
+                        "input": {
+                          "text": "Sim"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Não",
+                      "value": {
+                        "input": {
+                          "text": "Não"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "Eu não entendi, reformule sua resposta."
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "sys-yes-no",
+              "max_tries": 3,
+              "response_collection_behavior": "always_ask"
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_165",
+            "next_step": "step_167"
+          },
+          {
+            "step": "step_167",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Entendi. Como esses sintomas estão acontecendo neste momento, é importante ter atenção. Se você estiver com dor ou pressão no peito, falta de ar, palpitações intensas, tontura, desmaio ou outros sintomas importantes, procure atendimento médico imediatamente. Se os sintomas forem intensos ou estiverem piorando, acione o serviço de emergência local."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_167",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_165"
+                },
+                {
+                  "scalar": "yes"
+                }
+              ]
+            },
+            "next_step": "step_159"
+          },
+          {
+            "step": "step_159",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Entendi. Se os sintomas já passaram, é importante observar se eles voltam ou se aparecem acompanhados de outros sinais, como dor ou pressão no peito, falta de ar, palpitações, tontura ou desmaio. Caso os episódios sejam recorrentes ou estejam causando preocupação, procure um profissional de saúde para uma avaliação adequada. O CardioIA pode fornecer informações gerais,"
+                          },
+                          {
+                            "scalar": " mas não substitui uma consulta médica."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_159",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_165"
+                },
+                {
+                  "scalar": "no"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "Estou com dor no peito",
+        "action": "action_27333",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_27333_intent_13827"
+        },
+        "variables": [
+          {
+            "title": "Entendi. Se os sintomas já passaram, é importante observar se el",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_159",
+            "data_type": "any"
+          },
+          {
+            "title": "Obrigado por me informar. Para avaliar melhor a situação, esses ",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_165",
+            "data_type": "yes_no"
+          },
+          {
+            "title": "Entendi. Como esses sintomas estão acontecendo neste momento, é ",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_167",
+            "data_type": "any"
+          },
+          {
+            "title": "Entendi. Para entender melhor o que você está sentindo, há quant",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_339",
+            "data_type": "any"
+          },
+          {
+            "title": "Além disso, você está sentindo dor ou pressão no peito, falta de",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_340",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_28231",
+        "display_name": "relatar sintomas",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_952",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Claro. Posso ajudar a explicar o resultado apresentado pelo CardioIA. O sistema pode classificar uma radiografia como **Coração Normal** ou **Alerta de Cardiomegalia**, de acordo com a previsão realizada pelo modelo de Inteligência Artificial.\n\nEssa classificação é uma ferramenta de apoio e não confirma, sozinha, a presença ou ausência de uma doença."
+                          },
+                          {
+                            "scalar": " O resultado deve ser interpretado junto ao histórico clínico, aos sintomas e a outros exames por um profissional de saúde."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_952",
+            "next_step": "step_790"
+          },
+          {
+            "step": "step_790",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Qual resultado foi apresentado pelo sistema?"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential",
+                  "repeat_on_reprompt": false
+                },
+                {
+                  "options": [
+                    {
+                      "label": "Coração Normal",
+                      "value": {
+                        "input": {
+                          "text": "Coração Normal"
+                        }
+                      }
+                    },
+                    {
+                      "label": "Alerta de Cardiomegalia",
+                      "value": {
+                        "input": {
+                          "text": "Alerta de Cardiomegalia"
+                        }
+                      }
+                    }
+                  ],
+                  "response_type": "option",
+                  "repeat_on_reprompt": true
+                }
+              ]
+            },
+            "handlers": [
+              {
+                "type": "not_found",
+                "title": "validation_not_found_handler",
+                "output": {
+                  "generic": [
+                    {
+                      "values": [
+                        {
+                          "text_expression": {
+                            "concat": [
+                              {
+                                "scalar": "Eu não entendi. Selecione uma opção válida:"
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "response_type": "text",
+                      "selection_policy": "incremental"
+                    }
+                  ]
+                },
+                "handler": "validation_not_found_handler",
+                "resolver": {
+                  "type": "prompt_again"
+                },
+                "next_handler": "validation_not_found_max_tries_handler"
+              },
+              {
+                "type": "not_found_max_tries",
+                "title": "validation_not_found_max_tries_handler",
+                "handler": "validation_not_found_max_tries_handler",
+                "resolver": {
+                  "type": "fallback"
+                }
+              }
+            ],
+            "question": {
+              "entity": "entity_35260",
+              "max_tries": 3
+            },
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_790",
+            "next_step": "step_327"
+          },
+          {
+            "step": "step_327",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "O resultado **Coração Normal** indica que, de acordo com a classificação realizada pelo modelo, a imagem não apresentou sinais compatíveis com cardiomegalia. Esse resultado é uma previsão da Inteligência Artificial e não substitui a avaliação de um profissional de saúde."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_327",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_790"
+                },
+                {
+                  "value": "Coração Normal",
+                  "from_entity": "entity_35260"
+                }
+              ]
+            },
+            "next_step": "step_850"
+          },
+          {
+            "step": "step_850",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "O sistema classificou a imagem como **compatível com cardiomegalia**. Isso significa que, de acordo com a previsão realizada pelo modelo de Inteligência Artificial, a radiografia apresentou características associadas ao aumento do tamanho do coração.\n\nEsse resultado **não confirma um diagnóstico médico**. A classificação deve ser avaliada por um profissional de saúde, considerando os sintomas,"
+                          },
+                          {
+                            "scalar": " histórico clínico e outros exames. Caso você tenha sintomas preocupantes, procure atendimento médico."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "end_action"
+            },
+            "variable": "step_850",
+            "condition": {
+              "eq": [
+                {
+                  "variable": "step_790"
+                },
+                {
+                  "value": "Alerta de Cardiomegalia",
+                  "from_entity": "entity_35260"
+                }
+              ]
+            }
+          }
+        ],
+        "title": "O que significa meu resultado?",
+        "action": "action_47876",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_47876_intent_8370"
+        },
+        "variables": [
+          {
+            "title": "O resultado **Coração Normal** indica que, de acordo com a class",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_327",
+            "data_type": "any"
+          },
+          {
+            "title": "Qual resultado foi apresentado pelo sistema?",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_790",
+            "data_type": "any"
+          },
+          {
+            "title": "O sistema classificou a imagem como **compatível com cardiomegal",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_850",
+            "data_type": "any"
+          },
+          {
+            "title": "Claro. Posso ajudar a explicar o resultado apresentado pelo Card",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_952",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_27333",
+        "display_name": "resultado do exame",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_628",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "A frequência cardíaca corresponde ao número de vezes que o coração bate em um determinado período, geralmente medida em batimentos por minuto (bpm). Ela pode variar ao longo do dia de acordo com fatores como idade, atividade física, emoções, estresse, temperatura e uso de algumas substâncias ou medicamentos.\n\nDurante atividades físicas, por exemplo,"
+                          },
+                          {
+                            "scalar": " é esperado que os batimentos aumentem para atender à maior necessidade de oxigênio do organismo. Em repouso, a frequência tende a ser menor.\n\nUma frequência cardíaca alterada nem sempre significa que existe um problema cardíaco, mas alterações persistentes ou acompanhadas de sintomas como dor no peito, falta de ar, tontura ou desmaio devem ser avaliadas por um profissional de saúde."
+                          },
+                          {
+                            "scalar": "\n\nO CardioIA pode fornecer informações gerais sobre frequência cardíaca, mas não realiza diagnóstico médico."
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_628"
+          }
+        ],
+        "title": "O que é frequência cardíaca?",
+        "action": "action_28231",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_28231_intent_34378"
+        },
+        "variables": [
+          {
+            "title": "A frequência cardíaca corresponde ao número de vezes que o coraç",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_628",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_10291",
+        "display_name": "informações sobre frequência cardíaca",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      },
+      {
+        "type": "standard",
+        "steps": [
+          {
+            "step": "step_332",
+            "type": "standard",
+            "output": {
+              "generic": [
+                {
+                  "values": [
+                    {
+                      "text_expression": {
+                        "concat": [
+                          {
+                            "scalar": "Foi um prazer ajudar. Cuide da sua saúde e, sempre que necessário, procure orientação de um profissional de saúde. Até logo!"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "response_type": "text",
+                  "selection_policy": "sequential"
+                }
+              ]
+            },
+            "handlers": [],
+            "resolver": {
+              "type": "continue"
+            },
+            "variable": "step_332"
+          }
+        ],
+        "title": "Tchau",
+        "action": "action_3911",
+        "boosts": [],
+        "handlers": [],
+        "condition": {
+          "intent": "action_3911_intent_3465"
+        },
+        "variables": [
+          {
+            "title": "Foi um prazer ajudar. Cuide da sua saúde e, sempre que necessári",
+            "privacy": {
+              "enabled": false
+            },
+            "variable": "step_332",
+            "data_type": "any"
+          }
+        ],
+        "launch_mode": "learning",
+        "next_action": "action_47876",
+        "display_name": "despedida",
+        "topic_switch": {
+          "allowed_from": true,
+          "allowed_into": true,
+          "never_return": false
+        },
+        "disambiguation_opt_out": false
+      }
+    ],
+    "intents": [
+      {
+        "intent": "action_43613_intent_29154",
+        "examples": [
+          {
+            "text": "Boa tarde"
+          },
+          {
+            "text": "Preciso de ajuda"
+          },
+          {
+            "text": "Oi, preciso de ajuda"
+          },
+          {
+            "text": "Olá CardioIA"
+          },
+          {
+            "text": "Boa noite"
+          },
+          {
+            "text": "Olá"
+          },
+          {
+            "text": "Oi"
+          },
+          {
+            "text": "Bom dia"
+          }
+        ]
+      },
+      {
+        "intent": "action_28231_intent_34378",
+        "examples": [
+          {
+            "text": "O que são batimentos cardíacos?"
+          },
+          {
+            "text": "Me explique frequência cardíaca"
+          },
+          {
+            "text": "Quero saber sobre batimentos cardíacos"
+          },
+          {
+            "text": "Quero saber sobre frequência cardíaca"
+          },
+          {
+            "text": "O que significa frequência cardíaca?"
+          },
+          {
+            "text": "O que é frequência cardíaca?"
+          },
+          {
+            "text": "Quantos batimentos por minuto são normais?"
+          },
+          {
+            "text": "Qual é a frequência cardíaca normal?"
+          },
+          {
+            "text": "Por que meu coração está batendo rápido?"
+          },
+          {
+            "text": "Meu coração está acelerado"
+          }
+        ]
+      },
+      {
+        "intent": "fallback_connect_to_agent",
+        "examples": [
+          {
+            "text": "Eu quero contatar um agente/Eu quero entrar em contato com um agente"
+          },
+          {
+            "text": "Por favor, você pode entrar em contato comigo com um agente humano?"
+          },
+          {
+            "text": "Eu vou falar com um agente/ Eu vou falar com um agente de suporte."
+          },
+          {
+            "text": "Você pode me conectar com uma pessoa real?"
+          },
+          {
+            "text": "Preciso contatar a um atendente"
+          }
+        ],
+        "description": "Solicite um agente humano."
+      },
+      {
+        "intent": "action_27333_intent_13827",
+        "examples": [
+          {
+            "text": "Estou tendo palpitações"
+          },
+          {
+            "text": "Estou com dor no peito"
+          },
+          {
+            "text": "Estou com falta de ar"
+          },
+          {
+            "text": "Estou sentindo dor no peito"
+          },
+          {
+            "text": "Estou sentindo uma pressão no peito"
+          },
+          {
+            "text": "Estou com o coração acelerado"
+          },
+          {
+            "text": "Estou tonto"
+          },
+          {
+            "text": "Estou com desconforto no peito"
+          },
+          {
+            "text": "Meu coração está disparado"
+          },
+          {
+            "text": "Estou sentindo falta de ar"
+          }
+        ]
+      },
+      {
+        "intent": "action_10291_intent_3945",
+        "examples": [
+          {
+            "text": "Me explique pressão alta"
+          },
+          {
+            "text": "Quero entender hipertensão"
+          },
+          {
+            "text": "Minha pressão está alta"
+          },
+          {
+            "text": "O que é hipertensão?"
+          },
+          {
+            "text": "O que é pressão alta?"
+          },
+          {
+            "text": "O que é pressão arterial?"
+          },
+          {
+            "text": "Quero saber sobre pressão arterial"
+          }
+        ]
+      },
+      {
+        "intent": "action_47876_intent_8370",
+        "examples": [
+          {
+            "text": "Meu exame apresentou alerta"
+          },
+          {
+            "text": "Quero entender meu exame"
+          },
+          {
+            "text": "Meu exame deu normal"
+          },
+          {
+            "text": "Meu exame deu cardiomegalia"
+          },
+          {
+            "text": "A IA detectou cardiomegalia"
+          },
+          {
+            "text": "O resultado mostrou cardiomegalia"
+          },
+          {
+            "text": "O que significa coração normal?"
+          },
+          {
+            "text": "O que significa o resultado do exame?"
+          },
+          {
+            "text": "O que significa meu resultado?"
+          },
+          {
+            "text": "Quero saber o resultado do meu exame"
+          }
+        ]
+      },
+      {
+        "intent": "action_3911_intent_3465",
+        "examples": [
+          {
+            "text": "Tchau"
+          },
+          {
+            "text": "Até logo"
+          },
+          {
+            "text": "Até mais"
+          },
+          {
+            "text": "Obrigado"
+          },
+          {
+            "text": "Obrigada"
+          },
+          {
+            "text": "Pode encerrar"
+          }
+        ]
+      },
+      {
+        "intent": "action_25363_intent_46438",
+        "examples": [
+          {
+            "text": "Me explique cardiomegalia"
+          },
+          {
+            "text": "O que é um coração aumentado?"
+          },
+          {
+            "text": "Quero saber sobre cardiomegalia"
+          },
+          {
+            "text": "O que significa coração aumentado?"
+          },
+          {
+            "text": "O que significa cardiomegalia?"
+          },
+          {
+            "text": "O que é cardiomegalia?"
+          },
+          {
+            "text": "Quero entender o que é cardiomegalia"
+          },
+          {
+            "text": "O que acontece quando o coração está aumentado?"
+          }
+        ]
+      }
+    ],
+    "entities": [
+      {
+        "entity": "profane_words",
+        "values": [],
+        "fuzzy_match": false
+      },
+      {
+        "entity": "entity_35260",
+        "values": [
+          {
+            "type": "synonyms",
+            "value": "Coração Normal",
+            "synonyms": []
+          },
+          {
+            "type": "synonyms",
+            "value": "Alerta de Cardiomegalia",
+            "synonyms": []
+          }
+        ],
+        "fuzzy_match": true
+      },
+      {
+        "entity": "sys-yes-no",
+        "values": []
+      },
+      {
+        "entity": "danger_words",
+        "values": [],
+        "fuzzy_match": false
+      }
+    ],
+    "metadata": {
+      "api_version": {
+        "major_version": "v2",
+        "minor_version": "2018-11-08"
+      },
+      "skill": {
+        "counts": {
+          "actions": 11,
+          "intents": 8,
+          "entities": 4,
+          "data_types": 0,
+          "collections": 0,
+          "global_variables": 0
+        }
+      }
+    },
+    "variables": [],
+    "data_types": [],
+    "collections": [],
+    "counterexamples": [],
+    "system_settings": {
+      "variable": {
+        "format": {
+          "time": {
+            "pattern": "short"
+          },
+          "currency": {
+            "fraction_digits": 2
+          }
+        }
+      },
+      "auto_learn": {
+        "apply": true
+      },
+      "topic_switch": {
+        "enabled": true,
+        "messages": {
+          "enable_confirmation": true,
+          "confirmation_failure": {
+            "generic": [
+              {
+                "values": [
+                  {
+                    "text_expression": {
+                      "concat": [
+                        {
+                          "scalar": "Desculpe, não entendi, confirme, por favor."
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "response_type": "text",
+                "selection_policy": "sequential"
+              }
+            ]
+          },
+          "confirmation_request": {
+            "generic": [
+              {
+                "values": [
+                  {
+                    "text_expression": {
+                      "concat": [
+                        {
+                          "scalar": "Deseja continuar com o tópico anterior: "
+                        },
+                        {
+                          "system_variable": "digressed_from"
+                        },
+                        {
+                          "scalar": "?"
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "response_type": "text",
+                "selection_policy": "sequential"
+              },
+              {
+                "options": [
+                  {
+                    "label": "Sim",
+                    "value": {
+                      "input": {
+                        "text": "Sim"
+                      }
+                    }
+                  },
+                  {
+                    "label": "Não",
+                    "value": {
+                      "input": {
+                        "text": "Não"
+                      }
+                    }
+                  }
+                ],
+                "response_type": "option",
+                "repeat_on_reprompt": true
+              }
+            ]
+          }
+        },
+        "max_tries": 3
+      },
+      "disambiguation": {
+        "prompt": "Você quis dizer:",
+        "enabled": true,
+        "randomize": true,
+        "max_suggestions": 5,
+        "suggestion_text_policy": "title",
+        "none_of_the_above_prompt": "Nenhum dos itens acima",
+        "use_connect_to_support_prompt": "conectar ao suporte",
+        "single_answer_clarification_prompt": "Outra coisa"
+      },
+      "search_routing": {
+        "target": "conversational_search"
+      }
+    },
+    "learning_opt_out": false,
+    "language": "pt-br"
+  },
+  "description": "created for assistant 95bb681d-8c58-4dde-af35-8a66bdd857d8",
+  "dialog_settings": {
+    "source_assistant": "7f313679-e48b-4f05-b0a4-c8c87c440d80"
+  },
+  "created": "2026-09-16T00:43:21.069Z",
+  "updated": "2026-09-16T00:43:21.069Z",
+  "snapshot": "1",
+  "assistant_id": "95bb681d-8c58-4dde-af35-8a66bdd857d8",
+  "assistant_references": [
+    {
+      "name": "CardioIA",
+      "assistant_id": "7f313679-e48b-4f05-b0a4-c8c87c440d80",
+      "skill_reference": "actions skill"
+    }
+  ]
+}
