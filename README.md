@@ -62,7 +62,7 @@ Para aprofundar as capacidades do ecossistema CardioIA, implementamos módulos a
 ## 🎥 5. Demonstração Prática
 Confira o assistente em funcionamento, desde a ingestão da dúvida pelo paciente até a resposta inteligente gerada pelo sistema:
 
-🔗 **[Assista ao Vídeo de Demonstração (YouTube)](link)**
+🔗 **[Assista ao Vídeo de Demonstração (YouTube)](https://youtu.be/waaFQevwlEM)**
 
 ## 🛡️ Governança, Ética e Empatia no Atendimento Digital
 Assim como o processamento de imagens exige responsabilidade, o uso de IA Conversacional na saúde lida com a sensibilidade humana e a privacidade:
