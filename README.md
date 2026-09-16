@@ -10,8 +10,6 @@ Nesta **Fase 5 – Suporte Digital ao Paciente (Assistente Cardiológico Virtual
 - <a href="https://www.linkedin.com/in/nicolas--araujo/">Nicolas Antonio Silva Araujo</a> (RM: 566307)
 - <a href="https://www.linkedin.com/in/vitoria-bagatin-31ba88266/">Vitória Pereira Bagatin</a> (RM: 566519)
 
-*(Nota: Preencha seu RM no espaço com X)*
-
 ## 📂 Estrutura de Arquivos
 
 A organização do repositório reflete a arquitetura de integração entre Inteligência Artificial, Backend e Interface do Usuário:
